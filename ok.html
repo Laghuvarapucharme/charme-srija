@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Table Booking</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="script.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        .hero { 
+            text-align: center; 
+            padding: 50px 0; 
+            background: url('https://png.pngtree.com/background/20230611/original/pngtree-restaurant-table-set-with-plates-picture-image_3169395.jpg') no-repeat center center/cover; 
+            color: white; 
+            width: 100vw;
+            height: 100vh;
+        }
+        .container { margin-top: 20px; display: none; }
+        .hidden { display: none; }
+        .gallery-container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .gallery img { 
+            cursor: pointer; 
+            max-width: 200px; 
+            margin: 10px; 
+            transition: transform 0.3s, brightness 0.3s; 
+            border-radius: 15px;
+        }
+        .gallery img:hover { transform: scale(1.1); filter: brightness(1.2); }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Restaurant</a>
+            <button class="navbar-toggler" type="button" onclick="toggleMenu()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse hidden" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('home')">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('booking')">Reservations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('gallery')">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('contact')">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <section class="hero" id="home">
+        <h1>Welcome to Our Restaurant</h1>
+        <p>Book your table now and enjoy a delightful experience!</p>
+        <button class="btn btn-primary" onclick="showSection('booking')">Book a Table Now</button>
+    </section>
+    
+    <div class="container" id="booking">
+        <h2 class="text-center">Table Booking</h2>
+        <form id="bookingForm" class="p-4 border rounded bg-light">
+            <div class="mb-3">
+                <label for="date" class="form-label">Select Date</label>
+                <input type="date" id="date" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="time" class="form-label">Select Time</label>
+                <input type="time" id="time" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="guests" class="form-label">Number of Guests</label>
+                <input type="number" id="guests" class="form-control" min="1" required>
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" id="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" id="phone" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+            <p id="confirmation" class="mt-3 text-success"></p>
+        </form>
+    </div>
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('confirmation').textContent = 'Booking Confirmed! We look forward to seeing you.';
+        });
+
+        function toggleHome() {
+            var homeSection = document.getElementById('home');
+            homeSection.classList.toggle('hidden');
+        }
+    </script>
+    
+    <div class="container" id="gallery">
+        <h2>Gallery</h2>
+        <div class="gallery-container">
+           <div class="gallery">
+               <img src="https://tse3.mm.bing.net/th?id=OIP.YiUD6wUaxUw9SsrcGpJdrAHaEH&pid=Api&P=0&h=180" alt="Restaurant Interior" width="500" height="300">
+               <img src="https://c8.alamy.com/comp/KE1YCD/indian-restaurant-interior-detail-KE1YCD.jpg" alt="Dining Area"width="500" height="300">
+               <img src="https://tse2.mm.bing.net/th?id=OIP.l2YR9XmN8j5quPfbJbJ7RQHaGE&pid=Api&P=0&h=180" alt="Dining Area"width="800" height="300">
+           </div>
+        </div>
+    </div>
+    
+    <div class="container" id="contact">
+        <h2>Contact Us</h2>
+        <p>📍 123 Food Street, Gourmet City</p>
+        <p>📞 +123 456 7890</p>
+        <p>📧 contact@restaurant.com</p>
+    </div>
+    
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("navbarNav");
+            menu.classList.toggle("hidden");
+        }
+
+        function showSection(sectionId) {
+            document.getElementById("home").style.display = "none";
+            document.getElementById("booking").style.display = "none";
+            document.getElementById("gallery").style.display = "none";
+            document.getElementById("contact").style.display = "none";
+            document.getElementById(sectionId).style.display = "block";
+        }
+
+        function validateBooking() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+            if (name && email && phone) {
+                document.getElementById("confirmationMessage").innerText = "Your table has been booked successfully!";
+            } else {
+                alert("Please fill in all details correctly.");
+            }
+        }
+    </script>
+</body>
+</html>
